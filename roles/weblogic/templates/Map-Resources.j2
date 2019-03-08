@@ -1,0 +1,16 @@
+connect('{{domain_username}}','{{domain_password}}','t3://{{ hostvars[groups['app'][0]]['ansible_env'].SSH_CONNECTION.split(' ')[2] }}:{{admin_ListenPort}}')
+edit()
+startEdit()
+
+
+
+# Set NodeManager Properties to Plain SSL
+# =======================================
+cd('/Machines/{{ groups['app'][0] }}/NodeManager/{{ groups['app'][0] }}')
+cmo.setNMType('Plain')
+cmo.setListenAddress("{{groups['app'][0] }}")
+cmo.setDebugEnabled(false)
+cmo.setListenPort(5556)
+
+save()
+activate()
